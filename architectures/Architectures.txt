@@ -1,0 +1,106 @@
+QUESTION:: The XML files you are receiving come from a third party Financial company and have to be
+reconciled with our own records. New files are dumped daily in either a FTP or object store and
+our own records reside in a SQL database (MySQL, Postgres, SQL Server, etc.).
+Draw a pipeline showing the process for reconciling these files and specify the tools you would
+use.
+
+
+
+Primary Approach
+
+- This architecture is explained in the Architecture-1.png file.
+- Cron runs at 12 midnight everyday.
+- Transports new XML files to our server.
+- Stream the data into a CSV file using the XML_to_CSV.py program.
+- Use a JDBC driver to connect Spark to our SQL server. 
+- Load the original table as a dataframe into Spark from the SQL server.
+- Load the CSV in Spark as a dataframe.
+- Join the tables based on primary key.
+- Add a column to have reconciliation stats on columns that match vs that don't match.
+- Export the results as a CSV file from the SQL server.
+- Run some reconciliation algorithm/script to make corrections or trigger another process.
+
+
+
+Secondary  Approach with lesser data
+
+If the incoming CSV is a couple million rows, a simple approach can be used to handle this:
+- This architecture is explained in the Architecture-2.png file.
+- Cron runs at 12 midnight everyday.
+- Transports new XML files to our server.
+- Stream the data into a CSV file using the XML_to_CSV.py program.
+- Use LOAD DATA INFILE to load the CSVs into the SQL server as a temp table. If the csv is too large we can load the csv file in chunks. 
+- Join the original table with the temp table to see which records match and which don't. A fast way to do this is to have a checksum for each row in the tables and join based on that.
+- Use an insert query with the join query to move the reconciliation results into a results table directly.
+- Export the results as a CSV file from the SQL server.
+- Run some reconciliation algorithm/script to make corrections or trigger another process.
+- Truncate the temp table and records table to clean up.
+
+
+This brings us to our technology choice. If we have files that have a hundred million rows of data or more, SPARK is 
+- Fast: It runs workloads 100X faster. It is the best processing engine out there. 
+- Runs Everywhere: It can handle diverse input sources, which was demonstrated in our architecture; an SQL source and a csv source.
+- Distributed & Scalable: It will process in a distributed manner allowing us to infinitely scale.
+
+
+
+
+
+
+
+QUESTION:: The data team needs to report on marketing performance to optimize marketing spend. Draw an
+ETL(ELT) pipeline to extract data from the API in part 2 and specify the tools you would use. In
+addition, structure the data so it is efficient to query and easy to understand
+
+Primary Approach - This is illustrated in architecture-3.png
+As for the marketing data, I would use 
+- Our python requests client to stream data into a Kafka
+- Setup Kafka as an intermediate pub/sub system to store the requests from your REST endpoint. 
+- This will be more stable as Kafka has resilient storage capability and allows you to track the progress the Spark streaming app has made. 
+- Spark Streaming has native support for Kafka.
+- I will use Spark UDFs to perform transformations and to aggregate data.
+- The aggregated data can be saved in a SQL server or a data warehouse.
+- The aggregated data can also provide a real time view on a dashboard
+- The aggregated data will be 2 tables 1. Campaigns 2. Creatives
+- The resulting table would contain 
+        - Timestamp when metric was generated. 
+        - Campaign/Creative id
+        - Total Money spent till timestamp
+        - Total impressions. A column for each device
+        - Total conversions. A column for each device
+        - Total Clicks. A column for each device
+
+
+Secondary approach with lesser data - This is illustrated in architecture-4.png
+- Our python requests client to stream data into our datawarehouse.
+- Use a python SQL client to load records into tables as they come. This way we won't use much memory.
+- I would keep 3 separate tables for 1. campaigns 2. campaign statistics 3. creatives
+- I would create SQL views to report on marketing performance.
+- I would provide different stats using the views
+- The stats would include 
+       - Dollars spent per conversion
+       - Conversions per Campaign/Creative
+       - Campaigns/Creatives with highest conversion rate
+       - Campaigns/Creatives with highest conversion rate / Dollar
+- The views will contain joins & aggregations between the tables
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

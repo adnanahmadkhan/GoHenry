@@ -1,0 +1,26 @@
+[
+    {
+        "campaign_id": 12236567,
+        "creative_id": 93962252,
+        "start": "2021-01-01T00:00:00",
+        "end": "2021-02-01T00:00:00",
+        "impressions": 100,
+        "clicks": 10,
+        "conversions": 5,
+        "cost": 1.40,
+        "currency": "GBP",
+        "device": "mobile"
+    },
+    {
+        "campaign_id": 12236589,
+        "creative_id": 93962260,
+        "start": "2021-01-01T00:00:00",
+        "end": "2021-02-01T00:00:00",
+        "impressions": 88,
+        "clicks": 9,
+        "conversions": 3,
+        "cost": 0.80,
+        "currency": "USD",
+        "device": "desktop"
+    }
+]

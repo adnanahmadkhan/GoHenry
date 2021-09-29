@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ACCOUNTBALANCE FileName="accountbalance20210101.xml" FileDate="2021-01-01" NumberOfAccounts="400000">
+        <ACCOUNT>
+                <ACCOUNTNUMBER>4467859912</ACCOUNTNUMBER>
+                <CURRENCYCODE>840</CURRENCYCODE>
+                <BALANCE>100.00</BALANCE>
+                <CARD>
+                        <CARDID>16749538</CARDID>
+                        <TEST></TEST>
+                        <PRIMARY>Y</PRIMARY>
+                        <CARDSTATUS>00</CARDSTATUS>
+                        <EXPIRYDATE>2023-01-30</EXPIRYDATE>
+                </CARD>
+        </ACCOUNT>
+        <ACCOUNT>
+                <ACCOUNTNUMBER>4467695241</ACCOUNTNUMBER>
+                <CURRENCYCODE>840</CURRENCYCODE>
+                <BALANCE>175.59</BALANCE>
+                <CARD>
+                        <CARDID>59768435</CARDID>
+                        <PRIMARY>Y</PRIMARY>
+                        <TEST>test</TEST>
+                        <CARDSTATUS>00</CARDSTATUS>
+                        <EXPIRYDATE>2022-08-01</EXPIRYDATE>
+                </CARD>
+        </ACCOUNT>
+</ACCOUNTBALANCE>

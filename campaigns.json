@@ -1,0 +1,16 @@
+[
+    {
+        "campaign_id": 12236567,
+        "country": "UK",
+        "created": "2020-12-15T13:05:00",
+        "modified": "2020-12-30T08:30:00",
+        "status": "live"
+    },
+    {
+        "campaign_id": 12236589,
+        "country": "US",
+        "created": "2020-08-01T12:00:00",
+        "modified": "2020-08-01T12:00:00",
+        "status": "live"
+    }
+]

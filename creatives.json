@@ -1,0 +1,20 @@
+[
+    {
+        "creative_id": 93962252,
+        "call_to_action_type": "SIGN_UP",
+        "title": "Teen card",
+        "video_id": 1379850199,
+        "image_id": null,
+        "text": null,
+        "redirect_url": "https://www.gohenry.com/uk/"
+    },
+    {
+        "creative_id": 93962260,
+        "call_to_action_type": "LEARN_MORE",
+        "title": "Helping your kids learn money skills for life",
+        "video_id": null,
+        "image_id": null,
+        "text": "gohenry helps kids learn better money habits",
+        "redirect_url": "https://www.gohenry.com/us/"
+    }
+]
